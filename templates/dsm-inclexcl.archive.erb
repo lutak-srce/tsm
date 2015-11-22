@@ -1,0 +1,23 @@
+* Archive default INCLUDE/EXCLUDE options START
+
+exclude.fs /tmp
+exclude.archive /tmp
+exclude.backup  /tmp
+exclude.archive /var/run/*
+exclude.backup  /var/run/*
+exclude.archive /var/tmp/*
+exclude.backup  /var/tmp/*
+exclude.dir /tmp
+
+* Archive default INCLUDE/EXCLUDE options END
+
+* Local archive INCLUDE/EXCLUDE options START
+
+<% @archive_exclude.each do |archive_excl| -%>
+exclude.backup  <%= archive_excl %>
+exclude.archive <%= archive_excl %>
+exclude.dir     <%= archive_excl %>
+exclude.fs      <%= archive_excl %>
+<% end -%>
+
+* Local archive INCLUDE/EXCLUDE options END

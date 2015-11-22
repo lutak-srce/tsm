@@ -1,0 +1,49 @@
+*  INCLUDE/EXCLUDE options for Linux clients
+*
+*  EXCLUDE
+*  EXCLUDE.BACKUP
+*  EXCLUDE.FILE
+*  EXCLUDE.FILE.BACKUP
+*
+*  These options are equivalent. Use these options to exclude a file or
+*  group of files from backup services and space management services
+*  (if the HSM client is installed). The exclude.backup option only
+*  excludes files from normal backup, but not from HSM.
+*
+*
+*  EXCLUDE.FS excludes a single file system from backup processing
+
+exclude.fs /tmp
+
+*  EXCLUDE.ATTRIBUTE.SYMLINK excludes a file or a group of files that
+*  are symbolic links from backup processing only
+
+*  EXCLUDE.ARCHIVE excludes a file or a group of files that match the
+*  pattern from archive services only
+*
+*  EXCLUDE.BACKUP excludes a file or a group of files that match the
+*  pattern from backup services only
+*
+*  EXCLUDE.DIR excludes a directory, its files, and all its
+*  subdirectories and their files from backup processing
+
+* Default backup INCLUDE/EXCLUDE options
+
+exclude.archive /tmp
+exclude.backup  /tmp
+exclude.archive /var/run/*
+exclude.backup  /var/run/*
+exclude.archive /var/tmp/*
+exclude.backup  /var/tmp/*
+exclude.dir /tmp
+
+* Local backup INCLUDE/EXCLUDE options START
+
+<% @backup_exclude.each do |backup_excl| -%>
+exclude.backup  <%= backup_excl %>
+exclude.archive <%= backup_excl %>
+exclude.dir     <%= backup_excl %>
+exclude.fs      <%= backup_excl %>
+<% end -%>
+
+* Local backup INCLUDE/EXCLUDE options END

@@ -1,0 +1,78 @@
+************************************************************************
+* IBM Tivoli Storage Manager                                           *
+*                                                                      *
+* Client System Options file for UNIX, Linux (dsm.sys)                 *
+************************************************************************
+
+*  If your client node communicates with multiple TSM servers, be      *
+*  sure to add a stanza, beginning with the SERVERNAME option, for     *
+*  each additional server.                                             *
+
+************************************************************************
+
+******************************************
+*                                        *
+**** Srce BACKUP server specification ****
+*                                        *
+******************************************
+
+SErvername  <%= @backup_server %>
+
+      COMMmethod         TCPip
+      TCPPort            1500
+      TCPServeraddress   <%= @backup_server %>
+      nodename           <%= @nodename %>
+      MANAGEDSERVICES    SCHEDULE
+      WEBPorts           1555 1556
+<% if @backup_password == 'UNSET' -%>
+      passwordaccess     generate
+      passworddir        /etc/tsm-client
+<% else -%>
+      password           <%= @backup_password %>
+<% end -%>
+      schedmode          polling
+      queryschedperiod   1
+      inclexcl           <%= @file_backup_excl %>
+      schedlogname       /var/log/tsm-client/dsm-backupsched.log
+      errorlogname       /var/log/tsm-client/dsm-backuperror.log
+<% @backup_options.sort.each do |key, value| -%>
+      <%= key %>   <%= value %>
+<% end -%>
+<% @virtualmountpoint.each do |virtual_mp| -%>
+      include            <%= virtual_mp %>
+      virtualmountpoint  <%= virtual_mp %>
+<% end -%>
+
+
+*******************************************
+*                                         *
+**** Srce ARCHIVE server specification ****
+*                                         *
+*******************************************
+
+SErvername  <%= @archive_server %>
+
+      COMMmethod         TCPip
+      TCPPort            1500
+      TCPServeraddress   <%= @archive_server %>
+      nodename           <%= @nodename %>
+      MANAGEDSERVICES    SCHEDULE
+      WEBPorts           1558 1559
+<% if @archive_password == 'UNSET' -%>
+      passwordaccess     generate
+      passworddir        /etc/tsm-client
+<% else -%>
+      password           <%= @archive_password %>
+<% end -%>
+      schedmode          polling
+      queryschedperiod   1
+      inclexcl           <%= @file_archive_excl %>
+      schedlogname       /var/log/tsm-client/dsm-archivesched.log
+      errorlogname       /var/log/tsm-client/dsm-archiveerror.log
+<% @archive_options.sort.each do |key, value| -%>
+      <%= key %>   <%= value %>
+<% end -%>
+<% @virtualmountpoint.each do |virtual_mp| -%>
+      include            <%= virtual_mp %>
+      virtualmountpoint  <%= virtual_mp %>
+<% end -%>
