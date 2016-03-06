@@ -34,6 +34,8 @@ class tsm::params {
       $file_dsm_sys      = '/etc/tsm-client/dsm.sys'
       $file_backup_excl  = '/etc/tsm-client/dsm-inclexcl.backup'
       $file_archive_excl = '/etc/tsm-client/dsm-inclexcl.archive'
+      $file_backup_opt  = '/etc/tsm-client/dsm-backup.opt'
+      $file_archive_opt = '/etc/tsm-client/dsm-archive.opt'
     }
     #/(debian|ubuntu)/: {
     #}
