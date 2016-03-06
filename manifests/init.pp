@@ -126,6 +126,8 @@ class tsm (
   $archive_options   = $::tsm::params::archive_options,
   $noops             = undef,
   $virtualmountpoint = [],
+  $file_backup_opt  = $::tsm::params::file_backup_opt,
+  $file_archive_opt = $::tsm::params::file_archive_opt,
 ) inherits tsm::params {
 
   ### Input parameters validation
@@ -248,6 +250,14 @@ class tsm (
 
   file { $file_archive_excl :
     content => template('tsm/dsm-inclexcl.archive.erb'),
+  }
+
+  file { $file_backup_opt :
+    content => template('tsm/dsm-backup.opt.erb'),
+  }
+
+  file { $file_archive_opt :
+    content => template('tsm/dsm-archive.opt.erb'),
   }
 
 }
