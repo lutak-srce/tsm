@@ -126,8 +126,8 @@ class tsm (
   $archive_options   = $::tsm::params::archive_options,
   $noops             = undef,
   $virtualmountpoint = [],
-  $file_backup_opt  = $::tsm::params::file_backup_opt,
-  $file_archive_opt = $::tsm::params::file_archive_opt,
+  $file_backup_opt   = $::tsm::params::file_backup_opt,
+  $file_archive_opt  = $::tsm::params::file_archive_opt,
 ) inherits tsm::params {
 
   ### Input parameters validation
